@@ -9,3 +9,6 @@ step -6 : import students.json file in students collection,
     cmd: mongoimport -d databasename -c collectionname --drop --file filepath\filename
 
     note: before importing we goto mongo bin root and open cmd as administrator
+dummy user's
+username: user@gmail.com
+password: 123456
