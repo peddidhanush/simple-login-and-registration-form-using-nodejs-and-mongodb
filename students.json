@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5c32fbfc27f73837f4d36670"},"studentId":1,"name":"user","email":"user@gmail.com","class":"+2","year":2107,"city":"Guntur","country":"India","userId":"5c304daaab101a0b285d0d01","__v":0}
+{"_id":{"$oid":"5c32fc0b27f73837f4d36671"},"studentId":2,"name":"jolek Adam","email":"jolek@zdfpost.net","class":"+2","year":2017,"city":"Philadelphia","country":"India","userId":"5c304daaab101a0b285d0d01","__v":0}
+{"_id":{"$oid":"5c330ff2dc9a862798907b56"},"studentId":2,"name":"user","email":"user@gmail.com","class":"+2","year":2019,"city":"Guntur","country":"India","userId":"5c3231c2d058f42d00fea3bd","__v":0}

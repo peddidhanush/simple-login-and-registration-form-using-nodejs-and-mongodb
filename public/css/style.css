@@ -1,0 +1,8 @@
+.custom-container {
+    width: 50%;
+    height: 50vh;
+    margin: 10vh auto;
+}
+.modal-dialog {
+    max-width: 70%;
+}

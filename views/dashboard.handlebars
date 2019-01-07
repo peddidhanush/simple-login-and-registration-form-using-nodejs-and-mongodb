@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a href="/dashboard" class="navbar-brand">Education</a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#mobilemenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <ul class="collapse navbar-collapse navbar-nav justify-content-end" id="mobilemenu">
+                    <li class="nav-item"><a href="#" data-target="#add" data-toggle="modal" class="nav-link">Add
+                            Student</a></li>
+                    <li class="nav-item"><a href="/dashboard/logout" class="nav-link">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <section>
+        <div class="container mt-5 table-responsive">
+            {{#if errors}}
+            {{#each errors}}
+            <div class="alert alert-danger alert-dismissible fade show">
+                <strong>{{msg}}</strong>
+                <button class="close" data-dismiss="alert"><span>&times;</span></button>
+            </div>
+            {{/each}}
+            {{/if}}
+            {{#if success}}
+            <div class="alert alert-success alert-dismissible fade show">
+                <strong>{{success}}</strong>
+                <button class="close" data-dismiss="alert"><span>&times;</span></button>
+            </div>
+            {{/if}}
+            <table class="table table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Class</th>
+                        <th>Enrollment Year</th>
+                        <th>City</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each students}}
+                    <tr>
+                        <td>{{studentId}}</td>
+                        <td>{{name}}</td>
+                        <td>{{email}}</td>
+                        <td>{{class}}</td>
+                        <td>{{year}}</td>
+                        <td>{{city}}</td>
+                        <td>{{country}}</td>
+                        <td><a href="#" class="btn btn-warning" data-target="#edit_{{id}}" data-toggle="modal">Edit</a> <a href="/dashboard/delete/{{id}}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    <div class="modal fade" id="edit_{{id}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Edit Student {{name}}</h5>
+                                    <button class="close" data-dismiss="modal">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                                <form action="/dashboard/update" method="post">
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <input type="hidden" name="id" id="id" value="{{id}}">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="id">Student Id <span class="text-danger">*</span></label>
+                                                    <input type="number" class="form-control" id="id" name="studentId"
+                                                        value="{{studentId}}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="name">Name <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="name" name="name" value="{{name}}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email">Email <span class="text-danger">*</span></label>
+                                                    <input type="email" class="form-control" id="email" name="email"
+                                                        value="{{email}}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="class">Class <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="class" name="class"
+                                                        value="{{class}}" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="year">Enrollment year <span class="text-danger">*</span></label>
+                                                    <input type="number" class="form-control" id="year" name="year"
+                                                        value="{{year}}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="city">City <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="city" name="city" value="{{city}}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="country">Country <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="country" name="country"
+                                                        value="{{country}}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button data-dismiss="modal" class="btn btn-secondary">Close</button>
+                                        <input type="reset" value="Clear" class="btn btn-warning">
+                                        <input type="submit" class="btn btn-info" value="Update Student">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section class="modal-container">
+        <div class="modal fade" id="add" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Student</h5>
+                        <button class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <form action="/dashboard/addStudent" method="post">
+                        <div class="modal-body">
+                            <div class="row">
+                                <input type="hidden" name="user_id" id="user_id" value="{{user.id}}">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="id">Student Id <span class="text-danger">*</span></label>
+                                        <input type="number" class="form-control" id="id" name="studentId" value="{{studentId}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="name" name="name" value="{{name}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email <span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" id="email" name="email" value="{{email}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="class">Class <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="class" name="class" value="{{class}}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="year">Enrollment year <span class="text-danger">*</span></label>
+                                        <input type="number" class="form-control" id="year" name="year" value="{{year}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city">City <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="city" name="city" value="{{city}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">Country <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="country" name="country" value="{{country}}" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-secondary">Close</button>
+                            <input type="reset" value="Clear" class="btn btn-warning">
+                            <input type="submit" class="btn btn-info" value="Add Student">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script>
+    setTimeout(() => {
+        $('.alert').remove();
+    }, 3000)
+</script>
+
+</html>
