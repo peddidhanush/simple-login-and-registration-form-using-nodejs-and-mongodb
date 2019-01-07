@@ -12,3 +12,5 @@ step -6 : import students.json file in students collection,
 dummy user's
 username: user@gmail.com
 password: 123456
+
+url: http://localhost:3000
