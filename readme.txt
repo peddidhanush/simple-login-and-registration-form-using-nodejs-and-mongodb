@@ -13,4 +13,4 @@ dummy user's
 username: user@gmail.com
 password: 123456
 
-url: http://localhost:3000
+url: http://localhost:3000 based on the npm serves
